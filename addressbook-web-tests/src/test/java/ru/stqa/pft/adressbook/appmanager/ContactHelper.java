@@ -24,7 +24,39 @@ public class ContactHelper extends HelperBase{
     wd.findElement(By.name("email")).sendKeys(usersInfo.getEmail());
   }
 
-  public void initAddressBookEntryCreation() {
+  public void initContactCreation() {
     click(By.linkText("add new"));
+  }
+
+  public void selectContact() {
+    click(By.cssSelector("tbody>tr:nth-child(2) input"));
+  }
+
+  public void edit() {
+    click(By.cssSelector("tbody>tr:nth-child(2) a[href ^= \"edit\"]"));
+  }
+
+  public void updateContact() {
+    click(By.name("update"));
+  }
+
+  public void clearContactForm() {
+    clear(By.name("firstname"));
+    clear(By.name("middlename"));
+    clear(By.name("lastname"));
+    clear(By.name("nickname"));
+    clear(By.name("company"));
+    clear(By.name("home"));
+    clear(By.name("mobile"));
+    clear(By.name("email"));
+  }
+
+  public void deleteContact() {
+    click(By.xpath("//input[@value=\"Delete\"]"));
+  }
+
+
+  public void acceptDeletion() {
+    wd.switchTo().alert().accept();
   }
 }

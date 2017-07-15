@@ -15,6 +15,8 @@ public class HelperBase {
     wd.findElement(locator).click();
   }
 
+
+
   protected void type(By locator, String text) {
     wd.findElement(locator).sendKeys(text);
   }
@@ -26,5 +28,9 @@ public class HelperBase {
     } catch (NoAlertPresentException e) {
       return false;
     }
+  }
+
+  protected void clear(By locator) {
+    wd.findElement(locator).clear();
   }
 }
