@@ -1,6 +1,6 @@
-package ru.stqa.pft.adressbook.task_4;
+package ru.stqa.pft.adressbook.model;
 
-public class UsersInfo {
+public class ContactData {
   private final String name;
   private final String lastName;
   private final String company;
@@ -9,7 +9,7 @@ public class UsersInfo {
   private final String mobile;
   private final String email;
 
-  public UsersInfo(String name, String lastName, String company, String text, String homePhone, String mobile, String email) {
+  public ContactData(String name, String lastName, String company, String text, String homePhone, String mobile, String email) {
     this.name = name;
     this.lastName = lastName;
     this.company = company;

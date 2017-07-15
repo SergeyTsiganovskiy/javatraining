@@ -1,4 +1,4 @@
-package ru.stqa.pft.adressbook.task_4;
+package ru.stqa.pft.adressbook.tests;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
@@ -8,8 +8,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.*;
+import ru.stqa.pft.adressbook.model.ContactData;
 
-public class AddressBookEntryTest {
+public class ContactTest {
   FirefoxDriver wd;
 
   @BeforeMethod
@@ -30,9 +31,9 @@ public class AddressBookEntryTest {
   }
 
   @Test
-  public void testAddressBookEntry() {
+  public void testContact() {
     initAddressBookEntryCreation();
-    fillEntryForm(new UsersInfo("John", "Smith", "SuperCompany", "Some text", "725-25-25", "0971111111", "test@gmail.com"));
+    fillEntryForm(new ContactData("John", "Smith", "SuperCompany", "Some text", "725-25-25", "0971111111", "test@gmail.com"));
     submitForm();
     returnToHomePage();
   }
@@ -45,7 +46,7 @@ public class AddressBookEntryTest {
     wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
   }
 
-  private void fillEntryForm(UsersInfo usersInfo) {
+  private void fillEntryForm(ContactData usersInfo) {
     wd.findElement(By.name("firstname")).sendKeys(usersInfo.getName());
     wd.findElement(By.name("lastname")).sendKeys(usersInfo.getLastName());
     wd.findElement(By.name("company")).sendKeys(usersInfo.getCompany());
