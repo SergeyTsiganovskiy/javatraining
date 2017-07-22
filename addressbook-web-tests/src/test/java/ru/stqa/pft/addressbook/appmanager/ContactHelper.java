@@ -1,8 +1,11 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactHelper extends HelperBase{
@@ -15,14 +18,15 @@ public class ContactHelper extends HelperBase{
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public void fillContactForm(ContactData usersInfo) {
-    wd.findElement(By.name("firstname")).sendKeys(usersInfo.getName());
-    wd.findElement(By.name("lastname")).sendKeys(usersInfo.getLastName());
-    wd.findElement(By.name("company")).sendKeys(usersInfo.getCompany());
-    wd.findElement(By.name("address")).sendKeys(usersInfo.getText());
-    wd.findElement(By.name("home")).sendKeys(usersInfo.getHomePhone());
-    wd.findElement(By.name("mobile")).sendKeys(usersInfo.getMobile());
-    wd.findElement(By.name("email")).sendKeys(usersInfo.getEmail());
+  public void fillContactForm(ContactData usersInfo, boolean creation) {
+    type(By.name("firstname"), usersInfo.getName());
+    type(By.name("lastname"), usersInfo.getLastName());
+
+    if (creation) {
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(usersInfo.getGroup());
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
   }
 
   public void initContactCreation() {
@@ -43,13 +47,7 @@ public class ContactHelper extends HelperBase{
 
   public void clearContactForm() {
     clear(By.name("firstname"));
-    clear(By.name("middlename"));
     clear(By.name("lastname"));
-    clear(By.name("nickname"));
-    clear(By.name("company"));
-    clear(By.name("home"));
-    clear(By.name("mobile"));
-    clear(By.name("email"));
   }
 
   public void deleteContact() {
