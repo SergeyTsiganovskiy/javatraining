@@ -58,4 +58,14 @@ public class ContactHelper extends HelperBase{
   public void acceptDeletion() {
     wd.switchTo().alert().accept();
   }
+
+  public boolean iaThereAContact() {
+    return isElementPresent(By.cssSelector("tbody>tr:nth-child(2)"));
+  }
+
+  public void createContact(ContactData contactData) {
+    initContactCreation();
+    fillContactForm(new ContactData("John", "Smith", "a"), true);
+    submitForm();
+  }
 }
