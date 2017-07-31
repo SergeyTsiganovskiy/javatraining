@@ -33,9 +33,13 @@ public class ContactHelper extends HelperBase{
     click(By.linkText("add new"));
   }
 
-  public void selectContact() {
-    click(By.cssSelector("tbody>tr:nth-child(2) input"));
+  public void selectContact(int index) {
+    click(By.cssSelector(String.format("tbody>tr:nth-child(%d) input", index + 1)));
   }
+
+//  public void selectContact() {
+//    click(By.cssSelector("tbody>tr:nth-child(2) input"));
+//  }
 
   public void edit() {
     click(By.cssSelector("tbody>tr:nth-child(2) a[href ^= \"edit\"]"));
