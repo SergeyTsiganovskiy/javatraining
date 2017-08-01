@@ -38,19 +38,16 @@ public class ContactHelper extends HelperBase{
   }
 
   public void selectContact(int index) {
-    click(By.cssSelector(String.format("tbody>tr:nth-child(%d) input", index + 1)));
+    click(By.cssSelector(String.format("tbody>tr:nth-child(%d) input", index + 2)));
   }
 
-//  public void selectContact() {
-//    click(By.cssSelector("tbody>tr:nth-child(2) input"));
-//  }
 
-  public void edit() {
-    click(By.cssSelector("tbody>tr:nth-child(2) a[href ^= \"edit\"]"));
+  public void edit(int index) {
+    click(By.cssSelector(String.format("tbody>tr:nth-child(%d) a[href ^= \"edit\"]", index + 2)));
   }
 
   public void updateContact() {
-    click(By.name("update"));
+    click(By.xpath(".//*[@id='content']/form[1]/input[1]"));
   }
 
   public void clearContactForm() {
@@ -73,7 +70,7 @@ public class ContactHelper extends HelperBase{
 
   public void createContact(ContactData contactData) {
     initContactCreation();
-    fillContactForm(new ContactData("John", "Smith", "a"), true);
+    fillContactForm(contactData, true);
     submitForm();
   }
 
@@ -82,14 +79,14 @@ public class ContactHelper extends HelperBase{
   }
 
   public List<ContactData> getContactList() {
-    List<ContactData> groups = new ArrayList<>();
+    List<ContactData> contacts = new ArrayList<>();
     List<WebElement> elements = wd.findElements(By.cssSelector("#maintable>tbody>tr"));
-    elements.remove(0);
-    for (WebElement element:elements) {
-      String name = element.findElement(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(3)")).getText();
-      String lastName = element.findElement(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(2)")).getText();
-      groups.add(new ContactData(name, lastName , null));
+    for (int i = 1; i < elements.size(); i++) {
+      String name = elements.get(i).findElement(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(3)")).getText();
+      String lastName = elements.get(i).findElement(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(2)")).getText();
+      String id = elements.get(i).findElement(By.tagName("input")).getAttribute("value");
+      contacts.add(new ContactData(id, name, lastName , null));
     }
-    return groups;
+    return contacts;
   }
 }
