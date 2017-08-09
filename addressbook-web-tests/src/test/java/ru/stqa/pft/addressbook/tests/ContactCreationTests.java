@@ -7,29 +7,22 @@ import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTests extends TestBase{
 
   @Test
   public void testContactCreation() {
     app.goTo().homePage();
-    List<ContactData> before = app.contact().list();
+    Set<ContactData> before = app.contact().all();
     app.goTo().gotoContactPage();
     ContactData contact = new ContactData().withName("John").withLastName("Smith").withGroup("a");
     app.contact().create(contact);
     app.goTo().homePage();
-    List<ContactData> after = app.contact().list();
+    Set<ContactData> after = app.contact().all();
     Assert.assertEquals(after.size() , before.size() + 1);
 
-    int max = 0;
-    for (ContactData contactData: after) {
-      if (contactData.getId() > max) {
-        max = contactData.getId();
-      }
-    }
-
-    contact.withId(max);
-
+    contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
     before.add(contact);
     Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
   }
