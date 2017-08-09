@@ -68,24 +68,39 @@ public class ContactHelper extends HelperBase{
     return isElementPresent(By.cssSelector("tbody>tr:nth-child(2)"));
   }
 
-  public void createContact(ContactData contactData) {
+  public void create(ContactData contactData) {
     initContactCreation();
     fillContactForm(contactData, true);
     submitForm();
+  }
+
+  public void modify(int index, ContactData contact) {
+    selectContact(index);
+    edit(index);
+    clearContactForm();
+    fillContactForm(contact,false);
+    updateContact();
+
+  }
+
+  public void delete(int index) {
+    selectContact(index);
+    deleteContact();
+    acceptDeletion();
   }
 
   public int getContactCount() {
     return wd.findElements(By.xpath("//*[@name='selected[]']")).size();
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<>();
     List<WebElement> elements = wd.findElements(By.cssSelector("#maintable>tbody>tr"));
     for (int i = 1; i < elements.size(); i++) {
       String name = elements.get(i).findElement(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(3)")).getText();
       String lastName = elements.get(i).findElement(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(2)")).getText();
       int id = Integer.parseInt(elements.get(i).findElement(By.tagName("input")).getAttribute("value"));
-      contacts.add(new ContactData(id, name, lastName , null));
+      contacts.add(new ContactData().withId(id).withName(name).withLastName(lastName).withGroup(null));
     }
     return contacts;
   }
