@@ -6,6 +6,9 @@ public class ContactData {
   private String name;
   private String lastName;
   private String group;
+  private String homePhone;
+  private String mobilePhone;
+  private String workPhone;
 
   @Override
   public boolean equals(Object o) {
@@ -48,6 +51,21 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withHomePhone(String homePhone) {
+    this.homePhone = homePhone;
+    return this;
+  }
+
+  public ContactData withMobilePhone(String mobilePhone) {
+    this.mobilePhone = mobilePhone;
+    return this;
+  }
+
+  public ContactData withWorkPhone(String workPhone) {
+    this.workPhone = workPhone;
+    return this;
+  }
+
   public int getId() {
     return id;
   }
@@ -63,6 +81,20 @@ public class ContactData {
   public String getGroup() {
     return group;
   }
+
+
+  public String getHomePhone() {
+    return homePhone;
+  }
+
+  public String getMobilePhone() {
+    return mobilePhone;
+  }
+
+  public String getWorkPhone() {
+    return workPhone;
+  }
+
 
   @Override
   public String toString() {
