@@ -9,6 +9,7 @@ public class ContactData {
   private String homePhone;
   private String mobilePhone;
   private String workPhone;
+  private String allPhones;
 
   @Override
   public boolean equals(Object o) {
@@ -66,6 +67,11 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
   public int getId() {
     return id;
   }
@@ -95,14 +101,19 @@ public class ContactData {
     return workPhone;
   }
 
-
   @Override
   public String toString() {
     return "ContactData{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
+            "name='" + name + '\'' +
             ", lastName='" + lastName + '\'' +
+            ", homePhone='" + homePhone + '\'' +
+            ", mobilePhone='" + mobilePhone + '\'' +
+            ", workPhone='" + workPhone + '\'' +
             '}';
+  }
+
+  public String getAllPhones() {
+    return allPhones;
   }
 
 
