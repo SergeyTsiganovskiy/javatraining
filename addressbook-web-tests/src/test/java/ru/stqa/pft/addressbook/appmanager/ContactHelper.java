@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -12,7 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ContactHelper extends HelperBase{
+public class ContactHelper extends HelperBase {
 
   public ContactHelper(WebDriver wd) {
     super(wd);
@@ -28,7 +29,10 @@ public class ContactHelper extends HelperBase{
     type(By.name("home"), usersInfo.getHomePhone());
     type(By.name("mobile"), usersInfo.getMobilePhone());
     type(By.name("work"), usersInfo.getWorkPhone());
-
+    type(By.name("email"), usersInfo.getEmail());
+    type(By.name("email2"), usersInfo.getEmail2());
+    type(By.name("email3"), usersInfo.getEmail3());
+    type(By.name("address"), usersInfo.getAdress());
 
     if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(usersInfo.getGroup());
@@ -48,7 +52,7 @@ public class ContactHelper extends HelperBase{
 
 
   public void editById(int id) {
-    click(By.cssSelector("a[href = 'edit.php?id=" + id +"']"));
+    click(By.cssSelector("a[href = 'edit.php?id=" + id + "']"));
   }
 
   public void updateContact() {
@@ -84,7 +88,7 @@ public class ContactHelper extends HelperBase{
     selectContactById(contact.getId());
     editById(contact.getId());
     clearContactForm();
-    fillContactForm(contact,false);
+    fillContactForm(contact, false);
     updateContact();
     contactCache = null;
 
@@ -96,6 +100,20 @@ public class ContactHelper extends HelperBase{
     deleteContact();
     acceptDeletion();
     contactCache = null;
+  }
+
+
+  public void deleteAll() {
+//    if (!wd.findElement(By.id("MassCB")).isEnabled()){
+//      click(By.id("MassCB"));
+//    }
+    click(By.id("MassCB"));
+    click(By.cssSelector("input[value='Delete']"));
+    try {
+      wd.switchTo().alert().accept();
+    } catch (NoAlertPresentException e) {
+    }
+
   }
 
   public int count() {
@@ -116,8 +134,10 @@ public class ContactHelper extends HelperBase{
       String lastName = elements.get(i).findElement(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(2)")).getText();
       int id = Integer.parseInt(elements.get(i).findElement(By.tagName("input")).getAttribute("value"));
       String allPhones = elements.get(i).findElement(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(6)")).getText();
+      String address = elements.get(i).findElement(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(4)")).getText();
+      String allEmails = elements.get(i).findElement(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(5)")).getText();
       contactCache.add(new ContactData().withId(id).withName(name).withLastName(lastName).withGroup(null)
-              .withAllPhones(allPhones));
+              .withAllPhones(allPhones).withAdress(address).withAllEmails(allEmails));
     }
     return new Contacts(contactCache);
   }
@@ -130,7 +150,14 @@ public class ContactHelper extends HelperBase{
     String homePhone = wd.findElement(By.name("home")).getAttribute("value");
     String mobilePhone = wd.findElement(By.name("mobile")).getAttribute("value");
     String workPhone = wd.findElement(By.name("work")).getAttribute("value");
+    String email = wd.findElement(By.name("email")).getAttribute("value");
+    String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+    String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+    String address = wd.findElement(By.name("address")).getText();
+
     return new ContactData().withId(id).withName(name).withLastName(lastName)
-            .withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone);
+            .withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone)
+            .withEmail(email).withEmail2(email2).withEmail3(email3).withAdress(address);
   }
+
 }

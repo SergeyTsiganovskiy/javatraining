@@ -15,10 +15,10 @@ public class ContactPhoneTests extends TestBase{
   @BeforeMethod
   public void ensurePreconditions(){
     app.goTo().homePage();
-    if (app.contact().all().size() == 0){
-      app.contact().create(new ContactData().withName("John").withLastName("Smith")
-              .withHomePhone("+7457892467").withMobilePhone("(068)4578921").withGroup("a"));
-    }
+    app.contact().deleteAll();
+    app.contact().create(new ContactData().withName("John").withLastName("Smith")
+            .withHomePhone("+7457892467").withMobilePhone("(068)4578921").withGroup("a"));
+
   }
 
   @Test
