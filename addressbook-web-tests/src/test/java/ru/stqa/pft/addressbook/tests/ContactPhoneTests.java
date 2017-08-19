@@ -17,7 +17,7 @@ public class ContactPhoneTests extends TestBase{
     app.goTo().homePage();
     app.contact().deleteAll();
     app.contact().create(new ContactData().withName("John").withLastName("Smith")
-            .withHomePhone("+7457892467").withMobilePhone("(068)4578921").withGroup("a"));
+            .withHomePhone("+7457892467").withMobilePhone("(068)4578921").withGroup("for tests"));
 
   }
 

@@ -13,7 +13,7 @@ public class ContactAddressTests extends TestBase {
     app.goTo().homePage();
     app.contact().deleteAll();
     app.contact().create(new ContactData().withName("John").withLastName("Smith")
-            .withAdress("USA, NewYork, st.Green,45 123").withGroup("a"));
+            .withAdress("USA, NewYork, st.Green,45 123").withGroup("for tests"));
   }
 
   @Test

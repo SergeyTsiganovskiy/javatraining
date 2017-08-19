@@ -13,7 +13,7 @@ public class ContactEmailTests extends TestBase {
     app.goTo().homePage();
     app.contact().deleteAll();
     app.contact().create(new ContactData().withName("John").withLastName("Smith")
-            .withEmail("test1@gmail.com").withEmail2("test2@gmail.com").withEmail3("test3@gmail.com").withGroup("a"));
+            .withEmail("test1@gmail.com").withEmail2("test2@gmail.com").withEmail3("test3@gmail.com").withGroup("for tests"));
   }
 
   @Test
