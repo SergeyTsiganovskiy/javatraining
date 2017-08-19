@@ -5,15 +5,9 @@
     "footer": "footer 0"
   },
   {
-    "name": "for tests"
-  },
-  {
     "name": "test 1",
     "header": "header 1",
     "footer": "footer 1"
-  },
-  {
-    "name": "for tests"
   },
   {
     "name": "test 2",
