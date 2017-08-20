@@ -37,4 +37,5 @@ public class DbHelper {
     List<ContactData> res = session.createQuery("from ContactData  where deprecated = '0000-00-00'").list();
     return new Contacts(res);
   }
+
 }
