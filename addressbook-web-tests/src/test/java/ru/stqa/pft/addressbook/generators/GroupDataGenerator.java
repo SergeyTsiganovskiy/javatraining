@@ -36,8 +36,6 @@ public class GroupDataGenerator {
       jCommander.usage();
       return;
     }
-
-    generator.run();
   }
 
   private void run() throws IOException {
@@ -84,7 +82,6 @@ public class GroupDataGenerator {
       groups.add(new GroupData().withName(String.format("test %s", i))
               .withHeader(String.format("header %s", i)).withFooter(String.format("footer %s", i)));
     }
-    groups.add(new GroupData().withName("for tests"));
     return groups;
   }
 }

@@ -2,51 +2,31 @@
   <contact>
     <name>testName 0</name>
     <lastName>testLastName 0</lastName>
-    <group>test 0</group>
     <homePhone>testHomePhone 0</homePhone>
     <mobilePhone>testMobilePhone 0</mobilePhone>
     <workPhone>testWorkPhone 0</workPhone>
     <email>testEmail 0</email>
     <address>testAdress 0</address>
+    <groups/>
   </contact>
   <contact>
     <name>testName 1</name>
     <lastName>testLastName 1</lastName>
-    <group>test 0</group>
     <homePhone>testHomePhone 1</homePhone>
     <mobilePhone>testMobilePhone 1</mobilePhone>
     <workPhone>testWorkPhone 1</workPhone>
     <email>testEmail 1</email>
     <address>testAdress 1</address>
+    <groups/>
   </contact>
   <contact>
     <name>testName 2</name>
     <lastName>testLastName 2</lastName>
-    <group>test 0</group>
     <homePhone>testHomePhone 2</homePhone>
     <mobilePhone>testMobilePhone 2</mobilePhone>
     <workPhone>testWorkPhone 2</workPhone>
     <email>testEmail 2</email>
     <address>testAdress 2</address>
-  </contact>
-  <contact>
-    <name>testName 3</name>
-    <lastName>testLastName 3</lastName>
-    <group>test 0</group>
-    <homePhone>testHomePhone 3</homePhone>
-    <mobilePhone>testMobilePhone 3</mobilePhone>
-    <workPhone>testWorkPhone 3</workPhone>
-    <email>testEmail 3</email>
-    <address>testAdress 3</address>
-  </contact>
-  <contact>
-    <name>testName 4</name>
-    <lastName>testLastName 4</lastName>
-    <group>test 0</group>
-    <homePhone>testHomePhone 4</homePhone>
-    <mobilePhone>testMobilePhone 4</mobilePhone>
-    <workPhone>testWorkPhone 4</workPhone>
-    <email>testEmail 4</email>
-    <address>testAdress 4</address>
+    <groups/>
   </contact>
 </list>

@@ -35,7 +35,11 @@ public class ContactHelper extends HelperBase {
     type(By.name("address"), usersInfo.getAdress());
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(usersInfo.getGroup());
+      if (usersInfo.getGroups().size() > 0){
+        Assert.assertTrue(usersInfo.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group")))
+                .selectByVisibleText(usersInfo.getGroups().iterator().next().getName());
+      }
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -136,7 +140,7 @@ public class ContactHelper extends HelperBase {
       String allPhones = elements.get(i).findElement(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(6)")).getText();
       String address = elements.get(i).findElement(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(4)")).getText();
       String allEmails = elements.get(i).findElement(By.cssSelector("#maintable>tbody>tr>td:nth-of-type(5)")).getText();
-      contactCache.add(new ContactData().withId(id).withName(name).withLastName(lastName).withGroup(null)
+      contactCache.add(new ContactData().withId(id).withName(name).withLastName(lastName)/*.withGroup(null)*/
               .withAllPhones(allPhones).withAdress(address).withAllEmails(allEmails));
     }
     return new Contacts(contactCache);

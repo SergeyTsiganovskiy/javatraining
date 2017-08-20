@@ -3,14 +3,18 @@ package ru.stqa.pft.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class ContactDataGenerator {
@@ -49,9 +53,14 @@ public class ContactDataGenerator {
     }
   }
 
-  private void saveAsJson(List<ContactData> contacts, File file) {
-
+  private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
+    Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+    String json = gson.toJson(contacts);
+    try (Writer writer = new FileWriter(file)) {
+      writer.write(json);
+    }
   }
+
 
   private void saveAsXml(List<ContactData> contacts, File file) throws IOException {
     XStream xStream = new XStream();
@@ -66,7 +75,8 @@ public class ContactDataGenerator {
   private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
     Writer writer = new FileWriter(file);
     for (ContactData contact : contacts) {
-      writer.write(String.format("%s;%s;%s\n", contact.getName(), contact.getLastName(), contact.getAdress()));
+      writer.write(String.format("%s;%s;%s;%s;%s;%s;%s\n", contact.getName(), contact.getLastName(), contact.getAdress(),
+              contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(), contact.getEmail()));
     }
     writer.close();
   }
@@ -80,8 +90,7 @@ public class ContactDataGenerator {
               .withHomePhone(String.format("testHomePhone %s", i))
               .withMobilePhone(String.format("testMobilePhone %s", i))
               .withWorkPhone(String.format("testWorkPhone %s", i))
-              .withEmail(String.format("testEmail %s", i))
-              .withGroup("test 0"));
+              .withEmail(String.format("testEmail %s", i)));
     }
     return contacts;
   }
