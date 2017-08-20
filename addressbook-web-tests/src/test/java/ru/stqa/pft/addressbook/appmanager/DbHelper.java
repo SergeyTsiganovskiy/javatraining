@@ -27,7 +27,7 @@ public class DbHelper {
   public Groups groups(){
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    List<GroupData> res = session.createQuery("from GroupData").list();
+    List<GroupData> res = session.createQuery("from GroupData where deprecated = '0000-00-00'").list();
     return new Groups(res);
   }
 
