@@ -28,7 +28,7 @@ public class AddContactInGroupTest extends TestBase {
   }
 
   @Test
-  public void testContactAdress() {
+  public void testAddContactInGroup() {
     app.goTo().homePage();
     app.contact().clickContactByName(testContact.getName());
     String groupName = app.contact().getAllGroup().iterator().next();
