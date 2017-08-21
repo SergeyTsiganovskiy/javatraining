@@ -164,4 +164,34 @@ public class ContactHelper extends HelperBase {
             .withEmail(email).withEmail2(email2).withEmail3(email3).withAdress(address);
   }
 
+
+  public void clickContactByName(String contactName) {
+    List<WebElement> tableRows = wd.findElements(By.cssSelector("tbody>tr"));
+    tableRows.remove(0);
+    for (WebElement row:tableRows){
+      if (row.findElement(By.cssSelector("td:nth-of-type(3)")).getText().equals(contactName)){
+        row.findElement(By.cssSelector("td:nth-of-type(1) > input")).click();
+      }
+    }
+  }
+
+  public void chooseGroup(String groupName) {
+    Select select = new Select(wd.findElement(By.cssSelector(".right>select")));
+    select.selectByVisibleText(groupName);
+  }
+
+  public void addToGroup() {
+    wd.findElement(By.name("add")).click();
+  }
+
+
+  public Set<String> getAllGroup() {
+    Select select = new Select(wd.findElement(By.cssSelector(".right>select")));
+    List<WebElement> list = select.getOptions();
+    Set<String> groupNames = new HashSet<>();
+    for (WebElement element:list){
+      groupNames.add(element.getText());
+    }
+    return groupNames;
+  }
 }
