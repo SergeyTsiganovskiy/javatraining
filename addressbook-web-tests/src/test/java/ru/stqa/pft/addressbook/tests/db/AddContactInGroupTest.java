@@ -1,14 +1,13 @@
 package ru.stqa.pft.addressbook.tests.db;
 
-import org.junit.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.tests.TestBase;
 
 import java.util.Iterator;
-import java.util.Set;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
@@ -21,6 +20,11 @@ public class AddContactInGroupTest extends TestBase {
   public void ensurePreconditions() {
     app.goTo().homePage();
     app.contact().create(testContact);
+    if (app.db().groups().size() == 0) {
+      app.goTo().groupPage();
+      app.group().create(new GroupData().withName("GroupTestName")
+              .withHeader("GroupTestHeader").withFooter("GroupTestFooter"));
+    }
   }
 
   @Test
