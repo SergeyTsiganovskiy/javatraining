@@ -9,6 +9,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -185,10 +186,10 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  public Set<String> getAllGroup() {
+  public List<String> getAllGroup() {
     Select select = new Select(wd.findElement(By.cssSelector(".right>select")));
     List<WebElement> list = select.getOptions();
-    Set<String> groupNames = new HashSet<>();
+    List<String> groupNames = new ArrayList<>();
     for (WebElement element:list){
       groupNames.add(element.getText());
     }
