@@ -177,7 +177,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void chooseGroup(String groupName) {
-    Select select = new Select(wd.findElement(By.cssSelector(".right>select")));
+    Select select = new Select(wd.findElement(By.name("to_group")));
     select.selectByVisibleText(groupName);
   }
 
@@ -187,12 +187,22 @@ public class ContactHelper extends HelperBase {
 
 
   public List<String> getAllGroup() {
-    Select select = new Select(wd.findElement(By.cssSelector(".right>select")));
+    Select select = new Select(wd.findElement(By.name("to_group")));
     List<WebElement> list = select.getOptions();
     List<String> groupNames = new ArrayList<>();
     for (WebElement element:list){
       groupNames.add(element.getText());
     }
     return groupNames;
+  }
+
+  public void selectGroupToRemove(String groupName) {
+    Select select = new Select(wd.findElement(By.name("group")));
+    select.selectByVisibleText(groupName);
+
+  }
+
+  public void remove(){
+    wd.findElement(By.cssSelector("input[name='remove']")).click();
   }
 }
