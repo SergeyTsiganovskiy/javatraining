@@ -1,9 +1,9 @@
-package ru.stqa.pft.mantis.tests;
+package ru.stqa.pft.template.tests;
 
 import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import ru.stqa.pft.appmanager.ApplicationManager;
+import ru.stqa.pft.template.appmanager.ApplicationManager;
 
 public class TestBase {
 

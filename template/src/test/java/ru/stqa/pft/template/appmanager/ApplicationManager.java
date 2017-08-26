@@ -1,4 +1,4 @@
-package ru.stqa.pft.appmanager;
+package ru.stqa.pft.template.appmanager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
