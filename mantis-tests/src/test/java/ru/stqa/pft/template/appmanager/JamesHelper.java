@@ -64,9 +64,16 @@ public class JamesHelper {
     try {
       telnet.connect(mailServer, port);
       in = telnet.getInputStream();
+      out = new PrintStream(telnet.getOutputStream());
     } catch (Exception e){
       e.printStackTrace();
     }
+
+    readUntil("Login id:");
+    write("");
+    readUntil("Password:");
+    write("");
+
 
     readUntil("Login id:");
     write(login);

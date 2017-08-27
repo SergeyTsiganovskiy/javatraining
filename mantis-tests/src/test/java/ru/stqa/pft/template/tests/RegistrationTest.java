@@ -23,7 +23,7 @@ public class RegistrationTest extends TestBase{
 
   @Test
   public void testRegistration() throws IOException, MessagingException {
-    int random = new Random().nextInt(100);
+    int random = new Random().nextInt(200);
     String user = "user" + random;
     String password = "password";
     String email = "user" + random + "@localhost.localdomain";
