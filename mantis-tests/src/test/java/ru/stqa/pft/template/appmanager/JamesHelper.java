@@ -80,7 +80,7 @@ public class JamesHelper {
     readUntil("Password:");
     write(password);
 
-    readUntil("Welcome " + login + ". Help for a list of command");
+    readUntil("Welcome " + login + ". HELP for a list of commands");
   }
 
 
@@ -140,10 +140,10 @@ public class JamesHelper {
     return folder;
   }
 
-  public List<MailMessage> waitForMessage(String userName, String password, long timeout)
+  public List<MailMessage> waitForMail(String userName, String password, long timeout)
           throws MessagingException, IOException {
-    long start = System.currentTimeMillis();
-    while (System.currentTimeMillis() < start + timeout){
+    long now = System.currentTimeMillis();
+    while (System.currentTimeMillis() < now + timeout){
       List<MailMessage> allMail = getAllMail(userName, password);
       if (allMail.size() > 0){
         return allMail;
@@ -157,7 +157,7 @@ public class JamesHelper {
     throw new Error("No mail :(");
   }
 
-  private List<MailMessage> getAllMail(String userName, String password) throws MessagingException{
+  public List<MailMessage> getAllMail(String userName, String password) throws MessagingException{
     Folder inbox = openInbox(userName, password);
     List<MailMessage> messages = Arrays.asList(inbox.getMessages()).stream().map((m)-> toModelMail(m)).collect(Collectors.toList());
     closeFolder(inbox);
