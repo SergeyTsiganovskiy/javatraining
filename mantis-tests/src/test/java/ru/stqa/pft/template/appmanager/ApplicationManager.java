@@ -22,6 +22,7 @@ public class ApplicationManager {
   private FtpHelper ftp;
   private MailHelper mailHelper;
   private JamesHelper jamesHelper;
+  private LoginHelper loginHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -70,7 +71,8 @@ public class ApplicationManager {
       } else {
         wd = new InternetExplorerDriver();
       }
-      wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+//      wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+      wd.manage().window().maximize();
       wd.get(properties.getProperty("web.baseUrl"));
     }
     return wd;
@@ -87,5 +89,11 @@ public class ApplicationManager {
       jamesHelper = new JamesHelper(this);
     }
     return jamesHelper;
+  }
+  public LoginHelper login(){
+    if (loginHelper == null){
+      loginHelper = new LoginHelper(this);
+    }
+    return loginHelper;
   }
 }
