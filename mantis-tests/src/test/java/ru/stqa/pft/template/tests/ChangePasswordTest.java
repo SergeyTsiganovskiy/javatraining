@@ -37,10 +37,15 @@ public class ChangePasswordTest extends TestBase {
   public void testChangePassword() throws IOException, MessagingException {
     app.login().login("administrator", "root");
     app.login().resetPassword(user);
-    List<MailMessage> mailMessages = app.mail().waitForMessage(2, 10000);
-    String confirmationLink = findConfirmationLink(mailMessages, email);
+    List<MailMessage> mailMessages = app.mail().waitForMessage(3, 10000);
+    String confirmationLink = findChangePawwordConfirmationLink(mailMessages, email);
     app.registration().finish(confirmationLink, newPassword);
     assertTrue(app.newSession().login(user, newPassword));
+  }
+
+  private String findChangePawwordConfirmationLink(List<MailMessage> mailMessages, String email) {
+    VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
+    return regex.getText(mailMessages.get(2).text);
   }
 
   private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
