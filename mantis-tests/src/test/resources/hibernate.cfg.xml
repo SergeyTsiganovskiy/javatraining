@@ -35,7 +35,7 @@
         <property name="hbm2ddl.auto">validate</property>
 
         <!-- Names the annotated entity class -->
-        <mapping class="ru.stqa.pft.template.model.User"/>
+        <mapping class="ru.stqa.pft.soap.model.User"/>
 
     </session-factory>
 
