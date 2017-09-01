@@ -19,7 +19,7 @@ public class LoginHelper extends HelperBase {
 
   public void resetPassword(String userName){
 
-    click(By.xpath(".//*[@id='sidebar']/ul/li[6]/a/span"));
+    click(By.xpath(".//*[@id='sidebar']/ul/li[7]/a/span"));
     click(By.xpath(".//*[@id='main-container']/div[2]/div[2]/div/ul/li[2]/a"));
     type(By.id("username"), userName);
     click(By.xpath(".//*[@id='manage-user-edit-form']/input[2]"));

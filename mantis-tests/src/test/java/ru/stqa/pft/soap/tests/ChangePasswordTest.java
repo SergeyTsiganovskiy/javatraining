@@ -22,6 +22,11 @@ public class ChangePasswordTest extends TestBase {
     app.mail().start();
     List<User> users = app.db().users();
     if (users.size() > 0){
+      for (int i =0; i < users.size(); i++) {
+        if (users.get(i).getName().equals("administrator")) {
+          users.remove(i);
+        }
+      }
       testUser = users.get(users.size() - 1);
     } else {
       throw new RuntimeException("No users in database");
