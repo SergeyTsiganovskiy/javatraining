@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class SoapTests extends TestBase{
 
@@ -32,4 +33,8 @@ public class SoapTests extends TestBase{
     assertEquals(issue.getSummary(), created.getSummary());
   }
 
+  @Test
+  public void testIssueStatus() throws MalformedURLException, ServiceException, RemoteException{
+    assertTrue(isIssueOpen(1));
+  }
 }
