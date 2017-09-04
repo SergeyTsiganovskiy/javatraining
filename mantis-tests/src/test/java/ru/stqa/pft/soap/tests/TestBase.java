@@ -48,6 +48,12 @@ public class TestBase {
     }
   }
 
+  public static void skipIfNotFixedForRest(int issueId) throws IOException {
+
+    if (isIssueOpenRest(issueId)) {
+      throw new SkipException("Ignored because of issue " + issueId);
+    }
+  }
 
   public static boolean isIssueOpen(int issueId) throws MalformedURLException, ServiceException, RemoteException {
         MantisConnectPortType mc = new MantisConnectLocator()

@@ -36,11 +36,11 @@ public class SoapTests extends TestBase{
 
   @Test
   public void testIssueStatus() throws MalformedURLException, ServiceException, RemoteException{
-    assertTrue(isIssueOpen(1));
+    skipIfNotFixed(1);
   }
 
   @Test
   public void testIssueStatusRest() throws IOException {
-    assertTrue(isIssueOpenRest(41));
+    skipIfNotFixedForRest(41);
   }
 }
