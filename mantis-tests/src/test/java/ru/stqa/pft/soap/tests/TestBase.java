@@ -1,6 +1,13 @@
 package ru.stqa.pft.soap.tests;
 
 import biz.futureware.mantis.rpc.soap.client.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+import org.apache.http.client.fluent.Executor;
+import org.apache.http.client.fluent.Request;
 import org.openqa.selenium.remote.BrowserType;
 import org.testng.SkipException;
 import org.testng.annotations.AfterSuite;
@@ -26,7 +33,6 @@ public class TestBase {
   public void setUp() throws Exception {
     app.init();
     app.ftp().upload(new File("src/test/resources/config_inc.php"), "config_inc.php", "config_inc.php.bak");
-
   }
 
   @AfterSuite(alwaysRun = true)
@@ -36,10 +42,12 @@ public class TestBase {
   }
 
   public static void skipIfNotFixed(int issueId) throws MalformedURLException, ServiceException, RemoteException {
+
     if (isIssueOpen(issueId)) {
       throw new SkipException("Ignored because of issue " + issueId);
     }
   }
+
 
   public static boolean isIssueOpen(int issueId) throws MalformedURLException, ServiceException, RemoteException {
         MantisConnectPortType mc = new MantisConnectLocator()
@@ -50,5 +58,22 @@ public class TestBase {
     }
     return false;
   }
+
+  public static boolean isIssueOpenRest(int issueId) throws IOException {
+    String json = Executor.newInstance().auth("LSGjeU4yP1X493ud1hNniA==", "")
+            .execute(Request.Get(String.format("http://demo.bugify.com/api/issues/%s.json", issueId)))
+            .returnContent().asString();
+    JsonElement parsed = new JsonParser().parse(json);
+
+    JsonArray issues = parsed.getAsJsonObject().getAsJsonArray("issues");
+
+    String state_name = issues.get(0).getAsJsonObject().get("state_name").getAsString();
+
+    if (state_name.equals("Resolved")) {
+      return true;
+    }
+    return false;
+  }
+
 }
 

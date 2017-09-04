@@ -6,6 +6,7 @@ import ru.stqa.pft.soap.model.Issue;
 import ru.stqa.pft.soap.model.Project;
 
 import javax.xml.rpc.ServiceException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.Set;
@@ -36,5 +37,10 @@ public class SoapTests extends TestBase{
   @Test
   public void testIssueStatus() throws MalformedURLException, ServiceException, RemoteException{
     assertTrue(isIssueOpen(1));
+  }
+
+  @Test
+  public void testIssueStatusRest() throws IOException {
+    assertTrue(isIssueOpenRest(41));
   }
 }
