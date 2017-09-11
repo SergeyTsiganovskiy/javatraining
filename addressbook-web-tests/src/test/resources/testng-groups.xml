@@ -4,8 +4,9 @@
     <test name="Groups" >
         <classes>
             <class name="ru.stqa.pft.addressbook.tests.db.GroupCreationTests" />
-            <!--<class name="ru.stqa.pft.addressbook.tests.db.GroupModificationTests" />-->
-            <!--<class name="ru.stqa.pft.addressbook.tests.db.GroupDeletionTests" />-->
+            <class name="ru.stqa.pft.addressbook.tests.db.GroupModificationTests" />
+            <class name="ru.stqa.pft.addressbook.tests.db.GroupDeletionTests" />
+            <class name="ru.stqa.pft.addressbook.tests.db.DeleteContactFromGroupTest" />
         </classes>
     </test>
 </suite>
